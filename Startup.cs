@@ -37,7 +37,10 @@ namespace ShoeStore
             //NOTE Register Transient Services
             services.AddTransient<ShoesService>();
             services.AddTransient<ShoesRepository>();
-
+            services.AddTransient<BrandsService>();
+            services.AddTransient<BrandsRepository>();
+            services.AddTransient<OrdersService>();
+            services.AddTransient<OrdersRepository>();
         }
 
         private IDbConnection CreateDbConnection()

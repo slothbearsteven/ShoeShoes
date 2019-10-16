@@ -6,7 +6,7 @@ namespace ShoeStore.Interfaces
         decimal Size { get; set; }
         decimal Price { get; set; }
         string Color { get; set; }
+        int BrandId { get; set; }
 
-        // Brand
     }
 }

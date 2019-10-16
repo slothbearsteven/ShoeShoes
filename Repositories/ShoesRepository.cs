@@ -30,9 +30,9 @@ namespace ShoeStore.Repositories
         {
             string sql = @"
             INSERT INTO shoes
-            (id, name, price, size, color)
+            (id, name, price, size, color, brandId)
             VALUES
-            (@Id, @Name, @Price, @Size, @Color)";
+            (@Id, @Name, @Price, @Size, @Color, @BrandId)";
             _db.Execute(sql, newShoe);
         }
 

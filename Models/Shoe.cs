@@ -10,5 +10,6 @@ namespace ShoeStore.Models
         public decimal Size { get; set; }
         public decimal Price { get; set; }
         public string Color { get; set; }
+        public int BrandId { get; set; }
     }
 }
