@@ -70,12 +70,23 @@ namespace ShoeStore.Repositories
         public IEnumerable<Shoe> GetShoesByOrderId(int orderId)
         {
             string sql = @"
-                SELECT * FROM shoes s
-                JOIN shoesorders so
-                        ON s.id = so.shoeId
+                SELECT * FROM shoesorders so
+                INNER JOIN shoes s ON s.id = so.shoeId
                 WHERE so.orderId = @orderId
             ";
             return _db.Query<Shoe>(sql, new { orderId });
+        }
+
+        internal ShoeOrder GetShoeOrder(ShoeOrder so)
+        {
+            string sql = "SELECT * FROM shoesorders WHERE orderId = @OrderId AND shoeId = @ShoeId";
+            return _db.QueryFirstOrDefault<ShoeOrder>(sql, so);
+        }
+
+        public void RemoveShoeFromOrder(int id)
+        {
+            string sql = "DELETE FROM shoesorders WHERE id = @id";
+            _db.Execute(sql, new { id });
         }
     }
 }

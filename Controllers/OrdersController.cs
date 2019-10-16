@@ -43,6 +43,20 @@ namespace ShoeStore.Controllers
             }
         }
 
+
+        [HttpGet("{id}/shoes")]
+        public ActionResult<Order> GetShoes(int id)
+        {
+            try
+            {
+                return Ok(_ss.GetShoes(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost]
         public ActionResult<Order> Create([FromBody] Order newOrder)
         {
@@ -72,11 +86,25 @@ namespace ShoeStore.Controllers
         }
 
         [HttpPut("{id}/addShoe")]
-        public ActionResult<Order> AddShoe([FromBody] Shoe shoe, int id)
+        public ActionResult<string> AddShoeToOrder([FromBody] Shoe shoe, int id)
         {
             try
             {
-                return Ok(_ss.AddShoe(id, shoe));
+                return Ok(_ss.AddShoe(id, shoe.Id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{id}/removeShoe")]
+        public ActionResult<string> RemoveShoeFromOrder([FromBody] ShoeOrder so, int id)
+        {
+            try
+            {
+                so.OrderId = id;
+                return Ok(_ss.RemoveShoe(so));
             }
             catch (Exception e)
             {

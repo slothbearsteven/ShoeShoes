@@ -55,5 +55,15 @@ namespace ShoeStore.Repositories
             string sql = "DELETE FROM shoes WHERE id = @id";
             _db.Execute(sql, new { id });
         }
+
+        public IEnumerable<Shoe> GetOrdersByShoeId(string shoeId)
+        {
+            string sql = @"
+                SELECT * FROM shoesorders so
+                INNER JOIN orders o ON o.id = so.orderId
+                WHERE so.shoeId = @shoeId
+            ";
+            return _db.Query<Shoe>(sql, new { shoeId });
+        }
     }
 }
