@@ -94,7 +94,8 @@ namespace ShoeStore.Controllers
         {
             try
             {
-                return Ok(_ss.AddShoe(id, shoe.Id));
+                string userId = HttpContext.User.FindFirstValue("Id");
+                return Ok(_ss.AddShoe(id, shoe.Id, userId));
             }
             catch (Exception e)
             {
@@ -108,7 +109,8 @@ namespace ShoeStore.Controllers
             try
             {
                 so.OrderId = id;
-                return Ok(_ss.RemoveShoe(so));
+                string userId = HttpContext.User.FindFirstValue("Id");
+                return Ok(_ss.RemoveShoe(so, userId));
             }
             catch (Exception e)
             {

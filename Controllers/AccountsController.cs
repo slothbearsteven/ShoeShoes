@@ -43,6 +43,7 @@ namespace ShoeStore.Controllers
                 User user = _as.Login(creds);
                 user.SetClaims();
                 await HttpContext.SignInAsync(user._principal);
+
                 return Ok(user);
             }
             catch (Exception e)
@@ -73,6 +74,7 @@ namespace ShoeStore.Controllers
             try
             {
                 //NOTE THIS IS HOW YOU GET THE USER ID (node => req.session.uid)
+                var n = HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 var id = HttpContext.User.FindFirstValue("Id");
                 User user = _as.GetUserById(id);
                 return Ok(user);

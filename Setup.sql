@@ -1,4 +1,4 @@
--- USE shoeshoe2;
+-- USE shoeshoe;
 
 -- CREATE TABLE users
 -- (
