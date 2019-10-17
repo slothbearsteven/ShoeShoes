@@ -50,10 +50,10 @@ namespace ShoeStore.Services
             return _repo.GetShoesByOrderId(orderId);
         }
 
-        public string Delete(int id)
+        public string Delete(int id, string userId)
         {
             Order order = _repo.Get(id);
-            if (order == null) { throw new Exception("Invalid Id Homie"); }
+            if (order == null || order.UserId != userId) { throw new Exception("Invalid Request"); }
             _repo.Delete(id);
             return "Successfully Booted";
         }
